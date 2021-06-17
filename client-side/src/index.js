@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import Navbar from './Components/Navbar' //testing
 
 ReactDOM.render(
-  <React.StrictMode>
-     <Navbar /> {/*//testing */}
-    <App />
-  </React.StrictMode>,
+	<React.StrictMode>
+		<Navbar /> {/* added for testing */}
+		{/* <App /> Removed for testing*/}
+  	</React.StrictMode>,
   document.getElementById('root')
 );
 

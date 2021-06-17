@@ -12,6 +12,7 @@ class navbar extends Component
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
+                        <Nav.Link href="#students">Home</Nav.Link> {/* Add color change on hover (border or text)*/}
                         <Nav.Link href="#campuses">Campuses</Nav.Link>
                         <Nav.Link href="#students">Students</Nav.Link>
                     </Nav>
