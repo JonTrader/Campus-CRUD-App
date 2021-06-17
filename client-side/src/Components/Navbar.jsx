@@ -6,7 +6,7 @@ class navbar extends Component
     render()
     {
         return(
-            <></>
+            <>Hello</>
         )
     }
 }
