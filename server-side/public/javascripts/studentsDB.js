@@ -54,12 +54,13 @@ var students = sequelize.define('student', {
 //maybe add a parameter validator 
 //consider adding an error checker
 
-var addStudent = (firstName, lastName, email, gpa, campuses) => {
+var addStudent = (firstName, lastName, imageUrl, email, gpa, campuses) => {
     seshBegin();
     students.sync()
     .then(students.create({
         firstName: firstName,
         lastName: lastName,
+        imageUrl: imageUrl,
         email : email,
         gpa: gpa,
         campuses: campuses
@@ -70,12 +71,13 @@ var addStudent = (firstName, lastName, email, gpa, campuses) => {
 
 
 
-var editStudent = (primaryKey, firstName, lastName, email, gpa, campuses) => {
+var editStudent = (primaryKey, firstName, lastName, imageUrl, email, gpa, campuses) => {
     seshBegin();
     students.sync()
     .then(students.update({
         firstName: firstName,
         lastName: lastName,
+        imageUrl: imageUrl,
         email : email,
         gpa: gpa,
         campuses: campuses
