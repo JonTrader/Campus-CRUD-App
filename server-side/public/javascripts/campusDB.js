@@ -87,8 +87,22 @@ var editCampus = (primaryKey, name, imageUrl, address, description) => {
 }
 
 var deleteCampus = (primaryKey) => {
+
+    
     seshBegin();
-    campuses.sync()
+    //adding for removal of campus field for all students who went to soon to be deleted campus
+    students.sync()
+    then(students.update({
+        campuses: null
+
+    },
+    {
+        where: {
+            campuses: primaryKey //need get this portion of query right but want to associate this where clause with campus key identifier
+        }
+    }
+    ))
+    .then(campuses.sync())
     .then(campuses.destroy({
         where: {
             id: primaryKey
