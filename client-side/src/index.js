@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './Components/Navbar' //testing
+import CampusCard from './Components/CampusCard' //testing
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Navbar /> {/* added for testing */}
 		{/* <App /> Removed for testing*/}
   	</React.StrictMode>,
   document.getElementById('root')
