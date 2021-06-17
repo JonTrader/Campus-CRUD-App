@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Navbar from './Components/Navbar' //testing
 
 ReactDOM.render(
   <React.StrictMode>
+     <Navbar /> {/*//testing */}
     <App />
   </React.StrictMode>,
   document.getElementById('root')
