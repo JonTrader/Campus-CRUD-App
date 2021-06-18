@@ -1,4 +1,4 @@
-const result = require('dotenv').config({ path: '../.env' });
+const result = require('dotenv').config();
 
 
 if (result.error) {
@@ -75,12 +75,11 @@ var campuses = sequelize.define('campus', {
 //maybe add a parameter validator 
 //consider adding an error checker
 
-var addCampus = (name, imageUrl, address, description) => {
+var addCampus = (name, address, description) => {
     seshBegin();
     campuses.sync()
     .then(campuses.create({
         name: name,
-        imageUrl: imageUrl,
         address: address,
         description: description
 
@@ -90,12 +89,11 @@ var addCampus = (name, imageUrl, address, description) => {
 
 
 
-var editCampus = (primaryKey, name, imageUrl, address, description) => {
+var editCampus = (primaryKey, name, address, description) => {
     seshBegin();
     campuses.sync()
     .then(campuses.update({
         name: name,
-        imageUrl: imageUrl,
         address: address,
         description: description
 
@@ -107,6 +105,22 @@ var editCampus = (primaryKey, name, imageUrl, address, description) => {
     }
     ))
     .then(seshEnd());
+}
+
+var editCampusImage = (primaryKey, imageUrl) => {
+    seshBegin();
+    campuses.sync()
+    .then(campuses.update({
+        imageUrl: imageUrl,
+        },
+    {
+        where: {
+            id: primaryKey
+        }
+    }
+    ))
+    .then(seshEnd());
+
 }
 
 var deleteCampus = (primaryKey) => {
@@ -170,13 +184,12 @@ var students = sequelize.define('student', {
 //maybe add a parameter validator 
 //consider adding an error checker
 
-var addStudent = (firstName, lastName, imageUrl, email, gpa, campuses) => {
+var addStudent = (firstName, lastName, email, gpa, campuses) => {
     seshBegin();
     students.sync()
     .then(students.create({
         firstName: firstName,
         lastName: lastName,
-        imageUrl: imageUrl,
         email : email,
         gpa: gpa,
         campuseID: campuses
@@ -187,13 +200,12 @@ var addStudent = (firstName, lastName, imageUrl, email, gpa, campuses) => {
 
 
 
-var editStudent = (primaryKey, firstName, lastName, imageUrl, email, gpa, campuses) => {
+var editStudent = (primaryKey, firstName, lastName, email, gpa, campuses) => {
     seshBegin();
     students.sync()
     .then(students.update({
         firstName: firstName,
         lastName: lastName,
-        imageUrl: imageUrl,
         email : email,
         gpa: gpa,
         campuseID: campuses
@@ -206,6 +218,22 @@ var editStudent = (primaryKey, firstName, lastName, imageUrl, email, gpa, campus
     }
     ))
     .then(seshEnd());
+}
+
+var editStudentImage = (primaryKey, imageUrl) => {
+    seshBegin();
+    students.sync()
+    .then(students.update({
+        imageUrl: imageUrl,
+        },
+    {
+        where: {
+            id: primaryKey
+        }
+    }
+    ))
+    .then(seshEnd());
+
 }
 
 var deleteStudent = (primaryKey) => {
@@ -227,3 +255,8 @@ students.sync();
 campuses.hasMany(students);
 students.belongsTo(campuses);
 seshEnd;
+
+
+//Test creation
+
+campuses.addCampus()
