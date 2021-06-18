@@ -12,38 +12,34 @@ class Campus extends Component
     render()
     {
         return(
+                <Container>
+                    <Jumbotron className="mt-4 text-center">
 
-            <>
-                <Navbar />
-                    <Container>
-                        <Jumbotron className="mt-4 text-center">
+                        <Row className="align-items-center">
+                            <Col><h1>Campuses</h1></Col>
+                        <Col><h4>Add Campus</h4></Col>
+                        </Row>
 
-                            <Row className="align-items-center">
-                                <Col><h1>Campuses</h1></Col>
-                                <Col><h4>Add Campus</h4></Col>
-                            </Row>
-
-                            <Row className="align-items-center">
+                        <Row className="align-items-center">
                                 <Col><h6>Currently Displaying: num Campuses</h6></Col>
                                 <Col><Button variant="success">Add</Button></Col>
-                            </Row>
-
-                        </Jumbotron>
-
-                        <Row>
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
-                            <CampusCard />
                         </Row>
-                    </Container>
-            </>
+
+                    </Jumbotron>
+
+                    <Row>
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                        <CampusCard />
+                    </Row>
+                </Container>
             
         )
     }
