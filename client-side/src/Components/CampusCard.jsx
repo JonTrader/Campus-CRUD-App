@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Styling/Card.css'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 
@@ -23,20 +22,8 @@ class CampusCard extends Component
                         <Card.Text>
                             Description (maybe)
                         </Card.Text>
-                        <Row>
-
-                            <Col className="text-center">
-                                <a href="https://www.google.com"><Button variant="info">View</Button></a>
-                            </Col> 
-
-                            <Col className="text-center">
-                                <Button variant="warning">Edit</Button>
-                            </Col>
-
-                            <Col className="text-center">
-                                <a href="https://www.google.com"><Button variant="danger">Delete</Button></a>
-                            </Col> 
-                        </Row>
+                        
+                        <a href="https://www.google.com"><Button variant="info">View</Button></a>
                     </Card.Body>
                 </Card>
             </Col>
