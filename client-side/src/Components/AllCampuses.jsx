@@ -6,9 +6,52 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import CampusCard from './CampusCard'
+import axios from 'axios';
 
 class Campus extends Component
 {
+
+    constructor()
+    {
+        super();
+
+        this.state =
+        {
+            allCampuses: []
+        }
+    }
+
+    async componentDidMount()
+    {
+        try
+        {
+            const campusesValue = await axios("http://localhost:5000/allCampuses")
+            this.setState({allCampuses: campusesValue.data})
+            console.log(this.state.allCampuses);
+        }
+        catch (error)
+        {
+            console.log(error);
+        }
+        
+    }
+
+    campuses= () =>
+    {
+
+        let allCampuses = this.state.allCampuses;
+        if (allCampuses.length !== 0)
+        {
+            return allCampuses.map(campus => (<CampusCard key={campus.id} title={campus.name} description={campus.description} />))
+        }
+        else
+        {
+            return <h1>None</h1>
+        }
+    }
+
+
+
     render()
     {
         return(
@@ -28,16 +71,7 @@ class Campus extends Component
                     </Jumbotron>
 
                     <Row>
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
-                        <CampusCard />
+                        <this.campuses />
                     </Row>
                 </Container>
             

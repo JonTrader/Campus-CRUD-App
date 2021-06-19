@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './Components/Navbar' //testing
-import Campus from './Components/Campus' //testing
+import AllCampuses from './Components/AllCampuses' //testing
 import AddStudent from './Components/AddStudent' //testing
 
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Navbar />
-		<Campus /> {/* added for testing */}
+		<AllCampuses /> {/* added for testing */}
 		{/* <App /> Removed for testing*/}
 		
   	</React.StrictMode>,
