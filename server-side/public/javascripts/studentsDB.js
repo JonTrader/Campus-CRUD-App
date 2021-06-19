@@ -1,6 +1,15 @@
 require('dotenv').config();
 
+const c = require('./campusDB');
+
 var {Sequelize, DataTypes} = require('sequelize');
+
+module.exports = {
+    students: students,
+    addStudent : addStudent,
+    editStudent: editStudent,
+    deleteStudent: deleteStudent
+}
 
 const DB_PASS = process.env.DB_PASS;
 const DB_PORT= process.env.DB_PORT;
@@ -31,25 +40,40 @@ var seshEnd = () => {
 
 var students = sequelize.define('student', {
     firstName: { //not empty or null
-
+        type: Sequelize.STRING,
+        allowNull: false
     },
     lastName: { //not empty or null
-
+        type: Sequelize.STRING,
+        allowNull: false
     },
     email: { //not empty or null; must be a valid email
-
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            isEmail: true
+        }
     },
     imageUrl:{ //with a default value
-
+        type: Sequelize.STRING,
+        defaultValue: 'TO_DO_WITH_GENERIC_URL_STRING'
     },
     gpa: { //decimal between 0.0 and 4.0
-
-    },
-    campuses: { //Students may be associated with at most one campus.
-
+        type: DataTypes.FLOAT,
+        defaultValue: 0.0,
+        validate: {
+            max: 4.0,
+            min: 0.0
+        }
     }
+    
 
 });
+seshBegin;
+students.sync();
+c.campuses.sync();
+students.belongsTo(c.campuses);
+c.campuses.hasMany(students);
 
 //maybe add a parameter validator 
 //consider adding an error checker
@@ -63,7 +87,7 @@ var addStudent = (firstName, lastName, imageUrl, email, gpa, campuses) => {
         imageUrl: imageUrl,
         email : email,
         gpa: gpa,
-        campuses: campuses
+        campuseID: campuses
 
     }))
     .then(seshEnd());
@@ -80,7 +104,7 @@ var editStudent = (primaryKey, firstName, lastName, imageUrl, email, gpa, campus
         imageUrl: imageUrl,
         email : email,
         gpa: gpa,
-        campuses: campuses
+        campuseID: campuses
 
     },
     {
