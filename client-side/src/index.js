@@ -11,7 +11,7 @@ import AddStudent from './Components/AddStudent' //testing
 ReactDOM.render(
 	<React.StrictMode>
 		<Navbar />
-		<AddStudent /> {/* added for testing */}
+		<Campus /> {/* added for testing */}
 		{/* <App /> Removed for testing*/}
 		
   	</React.StrictMode>,

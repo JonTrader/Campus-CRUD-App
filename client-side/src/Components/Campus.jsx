@@ -10,6 +10,27 @@ import StudentCard from './StudentCard'
 
 class SingleCampus extends Component
 {
+
+    constructor()
+    {
+        super();
+
+        this.state =
+        {
+            allCampuses: []
+        }
+    }
+
+    // componentDidMount()
+    // {
+
+    //     console.log("Hello")
+    //     fetch("http://localhost:5000/allCampuses")
+    //         .then()
+
+    // }
+
+
     render()
     {
         return(
