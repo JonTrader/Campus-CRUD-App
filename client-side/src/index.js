@@ -5,13 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './Components/Navbar' //testing
 import Campus from './Components/Campus' //testing
-import AddCampus from './Components/AddCampus' //testing
+import AddStudent from './Components/AddStudent' //testing
 
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Navbar />
-		<AddCampus /> {/* added for testing */}
+		<AddStudent /> {/* added for testing */}
 		{/* <App /> Removed for testing*/}
 		
   	</React.StrictMode>,

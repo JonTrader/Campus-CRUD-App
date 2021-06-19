@@ -21,17 +21,17 @@ class AddCampus  extends Component
                         <form action="" method="POST">
                             <Form.Group controlId="campusName">
                                 <Form.Label>Campus Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Campus Name" />
+                                <Form.Control aria-required type="text" placeholder="Enter Campus Name" />
                             </Form.Group>
 
                             <Form.Group controlId="location">
                                 <Form.Label>Location</Form.Label>
-                                <Form.Control type="text" placeholder="Location" />
+                                <Form.Control type="text" placeholder="Enter Location" />
                             </Form.Group>
 
                             <Form.Group controlId="imageURL">
                                 <Form.Label>Image URL</Form.Label>
-                                <Form.Control type="password" placeholder="Image URL" />
+                                <Form.Control type="text" placeholder="Enter Image URL" />
                             </Form.Group>
 
                             <Form.Group controlId="description">
