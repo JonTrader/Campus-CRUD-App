@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './Components/Navbar' //testing
 import AllCampuses from './Components/AllCampuses' //testing
-import AddStudent from './Components/AddStudent' //testing
 
 
 ReactDOM.render(
