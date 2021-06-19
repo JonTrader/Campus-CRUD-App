@@ -24,8 +24,8 @@ class Campus extends Component
     {
         try
         {
-            const campusesValue = await axios("http://localhost:5000/allCampuses")
-            this.setState({allCampuses: campusesValue.data})
+            const campusesValues = await axios("http://localhost:5000/allCampuses")
+            this.setState({allCampuses: campusesValues.data})
             console.log(this.state.allCampuses);
         }
         catch (error)
@@ -41,7 +41,7 @@ class Campus extends Component
         let allCampuses = this.state.allCampuses;
         if (allCampuses.length !== 0)
         {
-            return allCampuses.map(campus => (<CampusCard key={campus.id} title={campus.name} description={campus.description} />))
+            return allCampuses.map(campus => (<CampusCard id={campus.id} key={campus.id} title={campus.name} description={campus.description} />))
         }
         else
         {

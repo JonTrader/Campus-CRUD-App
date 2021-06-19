@@ -14,9 +14,9 @@ class StudentCard extends Component
                 <Card style={{ width: '16rem' }} className="middle">
                     <Card.Img thumbnail="true" variant="top" src="http://4.bp.blogspot.com/-zsbDeAUd8aY/US7F0ta5d9I/AAAAAAAAEKY/UL2AAhHj6J8/s1600/facebook-default-no-profile-pic.jpg" />
                     <Card.Body>
-                        <Card.Title>Student Name</Card.Title>
+                        <Card.Title>{this.props.fname} {this.props.lname}</Card.Title>
                         <Card.Text>
-                            Campus Name
+                            GPA: {this.props.gpa}
                         </Card.Text>
 
                         <a href="https://www.google.com"><Button variant="info">View</Button></a>
