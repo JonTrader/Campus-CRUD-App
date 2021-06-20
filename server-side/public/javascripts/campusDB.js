@@ -14,11 +14,18 @@ module.exports = {
     campuses: campuses,
     addCampus: addCampus,
     editCampus: editCampus,
+    editCampusImage: editCampusImage,
     deleteCampus: deleteCampus,
+    selectCampus: selectCampus,
+    selectCampusAll: selectCampusAll,
     students: students,
     addStudent : addStudent,
     editStudent: editStudent,
-    deleteStudent: deleteStudent
+    editStudentImage: editStudentImage,
+    deleteStudent: deleteStudent,
+    selectStudent: selectStudent,
+    selectStudentAll: selectStudentAll,
+    selectStudentCampus: selectStudentCampus
 }
 
 const DB_PASS = process.env.DB_PASS;
@@ -120,8 +127,20 @@ var editCampusImage = (primaryKey, imageUrl) => {
         }
     }
     ))
-    .then(seshEnd());
+    // .then(seshEnd());
 
+}
+
+var selectCampus = (primaryKey) => {
+    seshBegin();
+    campuses.sync()
+    .then(campuses.findByPk(primaryKey));
+}
+
+var selectCampusAll = () => {
+    seshBegin;
+    campuses.sync()
+    .then(campuses.findAll())
 }
 
 var deleteCampus = (primaryKey) => {
@@ -181,6 +200,9 @@ var students = sequelize.define('student', {
                 }
             }
         }
+    },
+    campusId:{
+        type: Sequelize.INTEGER,
     }
     
 
@@ -252,29 +274,65 @@ var deleteStudent = (primaryKey) => {
     .then(seshEnd());
 }
 
+var selectStudent = (primaryKey) => {
+    seshBegin();
+    campuses.sync()
+    .then(campuses.findByPk(primaryKey));
+}
+
+var selectStudentAll = () => {
+    seshBegin;
+    campuses.sync()
+    .then(campuses.findAll())
+}
+
+var selectStudentCampus = (campusId) => {
+    seshBegin;
+    campuses.sync()
+    .then(campuses.findAll({where: {campusId: campusId}}));
+}
+
 //console.log(`${DB_USER}\n${DB_PASS}\n${DB_PORT}\n${DB_NAME}`);
 
 // seshBegin;
 campuses.sync();
 students.sync();
 
-campuses.hasMany(students/*, (err) => {
-    console.log(err);
-}*/);
+// campuses.hasMany(students/*, (err) => {
+//     console.log(err);
+// }*/);
 
-students.belongsTo(campuses/*, (err) => {
-    console.log(err);
-}*/);
+// students.belongsTo(campuses/*, (err) => {
+//     console.log(err);
+// }*/);
 
+campuses.hasMany(students, {
+          foreignKey: 'campusId',
+          as: 'students',
+          onDelete: 'SET NULL',
+          onUpdate: 'CASCADE'
+        });
 
+students.belongsTo(campuses, {
+      foreignKey: 'campusId',
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
+    });
 
 
 
 //Test creation
 
-// addCampus("Lehman2", "Bronx, NY",""); //test case passed
+// addCampus("Lehman", "Bronx, NY",""); //test case passed
+// addCampus("Roc-a-Fella", "Brooklyn, NY",""); //test case passed
+// addCampus("Dipset", "Manhattan, NY",""); //test case passed
+
+// addStudent("Killa", "Cam", "pink@dipset.com", 4.8, 3);
+// addStudent("Free", "Way", "highway@rockafella.com", 2.5, null);
+// addStudent("Juelz", "Santana", "heyma@dipset.com", 3.5, 3);
 
 
 // addStudent("Cardi" ,"B", "blo@od.com", 3.7, null); //validator test passed
 // addStudent("Lloyd", "Banks", "G@unit.com", 4.8, 2);
 deleteCampus(2);
+deleteCampus(3);
