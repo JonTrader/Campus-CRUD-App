@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import CampusCard from './CampusCard'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Campus extends Component
@@ -53,6 +54,8 @@ class Campus extends Component
 
     render()
     {
+        let forLength = this.state.allCampuses;
+
         return(
                 <Container>
                     <Jumbotron className="mt-4 text-center">
@@ -63,8 +66,12 @@ class Campus extends Component
                         </Row>
 
                         <Row className="align-items-center">
-                                <Col><h6>Currently Displaying: num Campuses</h6></Col>
-                                <Col><Button variant="success">Add</Button></Col>
+                                <Col><h6>Currently Displaying: {forLength.length} Campuses</h6></Col>
+                                <Col>
+                                    <Link to="/addCampus" className="nav-link">
+                                        <Button variant="success">Add</Button>
+                                    </Link>
+                                </Col>
                         </Row>
 
                     </Jumbotron>

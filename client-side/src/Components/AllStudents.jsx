@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import StudentCard from './StudentCard'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class AllStudents extends Component
@@ -56,24 +57,29 @@ class AllStudents extends Component
 
     render()
     {
+        let forLength = this.state.allStudents;
+
         return(
             <Container>
                 <Jumbotron className="mt-4 text-center">
 
                     <Row className="align-items-center">
-                        <Col><h1>Campuses</h1></Col>
-                        <Col><h4>Add Campus</h4></Col>
+                        <Col><h1>Students</h1></Col>
+                        <Col><h4>Add Student</h4></Col>
                     </Row>
 
                     <Row className="align-items-center">
-                        <Col><h6>Currently Displaying: num Campuses</h6></Col>
-                        <Col><Button variant="success">Add</Button></Col>
+                        <Col><h6>Currently Displaying: {forLength.length} Students</h6></Col>
+                        <Col>
+                            <Link to="/addStudent" className="nav-link">
+                                <Button variant="success">Add</Button>
+                            </Link>
+                        </Col>
                     </Row>
 
                 </Jumbotron>
 
                 <Row>
-                    <StudentCard /> {/* Testing Purposes*/}
                     
                 </Row>
             </Container>
