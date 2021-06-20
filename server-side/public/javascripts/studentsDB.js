@@ -71,9 +71,9 @@ var students = sequelize.define('student', {
 });
 seshBegin;
 students.sync();
-c.campuses.sync();
+campuses.sync();
 students.belongsTo(c.campuses);
-c.campuses.hasMany(students);
+campuses.hasMany(students);
 
 //maybe add a parameter validator 
 //consider adding an error checker

@@ -1,11 +1,11 @@
 const result = require('dotenv').config();
 
 
-if (result.error) {
-    throw result.error
-  }
+// if (result.error) {
+//     throw result.error
+//   }
   
-  console.log(result.parsed)
+//   console.log(result.parsed)
 
 // const s = require('./studentsDB');
 
@@ -66,9 +66,10 @@ var campuses = sequelize.define('campus', {
         type: DataTypes.TEXT
     }
 , 
-}, {
-    tableName: 'campuses'
-});
+}, //{
+    //tableName: 'campuses'
+//}
+);
 
 
 
@@ -84,7 +85,7 @@ var addCampus = (name, address, description) => {
         description: description
 
     }))
-    .then(seshEnd());
+    // .then(seshEnd());
 }
 
 
@@ -128,7 +129,7 @@ var deleteCampus = (primaryKey) => {
     
     seshBegin();
     //adding for removal of campus field for all students who went to soon to be deleted campus
-    students.sync()
+    // students.sync()
     //Below should be able to be commented out due to the default delete behavior for SEQULIZES has many
     // .then(students.update({
     //     campuses: null
@@ -140,13 +141,13 @@ var deleteCampus = (primaryKey) => {
     //     }
     // }
     // ))
-    .then(campuses.sync())
+    campuses.sync()
     .then(campuses.destroy({
         where: {
             id: primaryKey
         }
     }))
-    .then(seshEnd());
+    // .then(seshEnd());
 }
 
 var students = sequelize.define('student', {
@@ -173,8 +174,12 @@ var students = sequelize.define('student', {
         type: DataTypes.FLOAT,
         defaultValue: 0.0,
         validate: {
-            max: 4.0,
-            min: 0.0
+            custommValidator (value) {
+                if (value < 0.0 || value >4.0){
+                    this.gpa = 0.0;
+                    console.log("GPA must be between 0.0 and 4.0, reverting to 0.0");
+                }
+            }
         }
     }
     
@@ -184,7 +189,7 @@ var students = sequelize.define('student', {
 //maybe add a parameter validator 
 //consider adding an error checker
 
-var addStudent = (firstName, lastName, email, gpa, campuses) => {
+var addStudent = (firstName, lastName, email, gpa, campus) => {
     seshBegin();
     students.sync()
     .then(students.create({
@@ -192,15 +197,15 @@ var addStudent = (firstName, lastName, email, gpa, campuses) => {
         lastName: lastName,
         email : email,
         gpa: gpa,
-        campuseID: campuses
+        campusId: campus
 
     }))
-    .then(seshEnd());
+    // .then(seshEnd());
 }
 
 
 
-var editStudent = (primaryKey, firstName, lastName, email, gpa, campuses) => {
+var editStudent = (primaryKey, firstName, lastName, email, gpa, campus) => {
     seshBegin();
     students.sync()
     .then(students.update({
@@ -208,7 +213,7 @@ var editStudent = (primaryKey, firstName, lastName, email, gpa, campuses) => {
         lastName: lastName,
         email : email,
         gpa: gpa,
-        campuseID: campuses
+        campusId: campus
 
     },
     {
@@ -217,7 +222,7 @@ var editStudent = (primaryKey, firstName, lastName, email, gpa, campuses) => {
         }
     }
     ))
-    .then(seshEnd());
+    // .then(seshEnd());
 }
 
 var editStudentImage = (primaryKey, imageUrl) => {
@@ -247,16 +252,29 @@ var deleteStudent = (primaryKey) => {
     .then(seshEnd());
 }
 
-console.log(`${DB_USER}\n${DB_PASS}\n${DB_PORT}\n${DB_NAME}`);
+//console.log(`${DB_USER}\n${DB_PASS}\n${DB_PORT}\n${DB_NAME}`);
 
-seshBegin;
+// seshBegin;
 campuses.sync();
 students.sync();
-campuses.hasMany(students);
-students.belongsTo(campuses);
-seshEnd;
+
+campuses.hasMany(students/*, (err) => {
+    console.log(err);
+}*/);
+
+students.belongsTo(campuses/*, (err) => {
+    console.log(err);
+}*/);
+
+
+
 
 
 //Test creation
 
-campuses.addCampus()
+// addCampus("Lehman2", "Bronx, NY",""); //test case passed
+
+
+// addStudent("Cardi" ,"B", "blo@od.com", 3.7, null); //validator test passed
+// addStudent("Lloyd", "Banks", "G@unit.com", 4.8, 2);
+deleteCampus(2);
