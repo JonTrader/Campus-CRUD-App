@@ -23,7 +23,7 @@ class CampusCard extends Component
                             {this.props.description}
                         </Card.Text>
                         
-                        <a href={`/${this.props.id}`}><Button variant="info">View</Button></a>
+                        <a href={`/allCampuses/${this.props.id}`}><Button variant="info">View</Button></a>
                     </Card.Body>
                 </Card>
             </Col>

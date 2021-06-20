@@ -4,6 +4,8 @@ const c = require('./campusDB');
 
 var {Sequelize, DataTypes} = require('sequelize');
 
+const express = require('express');
+const app = express();
 module.exports = {
     students: students,
     addStudent : addStudent,
@@ -126,3 +128,16 @@ var deleteStudent = (primaryKey) => {
     }))
     .then(seshEnd());
 }
+
+
+
+app.get('/allStudents', async (req, res) =>
+{
+    const values = await students.findAll();
+    res.send(values);
+})
+
+app.listen(5005, (req, res) =>
+{
+    console.log("Listening on port 5005");
+})

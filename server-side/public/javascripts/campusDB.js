@@ -1,5 +1,10 @@
 const result = require('dotenv').config();
 
+const express = require('express');
+const app = express();
+const cors = require('cors')
+app.use(cors())
+
 
 if (result.error) {
     throw result.error
@@ -254,9 +259,36 @@ campuses.sync();
 students.sync();
 campuses.hasMany(students);
 students.belongsTo(campuses);
-seshEnd;
+// seshEnd;
 
 
 //Test creation
 
-campuses.addCampus()
+// addCampus()
+
+app.get('/allCampuses', async (req, res) =>
+{
+    const values = await campuses.findAll();
+    res.send(values);
+})
+
+app.get('/allCampuses/:id', async (req, res) =>
+{
+    const value = req.params.id;
+    try
+    {
+        const campus = await campuses.findByPk( parseInt(value) );
+        res.send(campus);
+    }
+    catch (error)
+    {
+        console.log(error)
+    }
+    
+})
+
+
+app.listen(5000, (req, res) =>
+{
+    console.log("Listening on port 5000");
+})
