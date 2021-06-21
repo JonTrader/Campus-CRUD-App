@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var c = require('../public/javascripts/campusDB');
-express.request(bodyParser.urlencoded({extended:false}));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,73 +10,75 @@ router.get('/', function(req, res, next) {
 router.get(`/campus/all`, function(request, response) {
   console.log(`got request for " /campus/all/" `);
 
-  c.selectCampusAll( function(err, results){
+  const campuses = c.selectCampusAll( function(err, results){
     if(err){
       console.log(err.stack);
   }
   console.log(result.rows);
   })
-  response.send(`All Campuses`);
+  response.send(campuses);
 });
 
 router.get(`/campus::id`, function(request, response) {
   let id = request.params.id;
   console.log(`got request for " /campus/${id}" `);
 
-  c.selectCampus(id, function(err, results){
+  const campus = c.selectCampus(id, function(err, results){
     if(err){
       console.log(err.stack);
   }
   console.log(result.rows);
   })
 
-  response.send(`Campus ${id}`);
+  response.send(campus);
 });
 
 router.get(`/campus::id/students`, function(request, response) {
   let id = request.params.id;
   console.log(`got request for " /campus/${id}/students" `);
 
-  c.selectStudentCampus(id, function(err, results){
+  const campStudents = c.selectStudentCampus(id, function(err, results){
     if(err){
       console.log(err.stack);
   }
   console.log(result.rows);
   })
 
-  response.send(`All Students on Campus ${id}`);
+  response.send(campStudents);
 });
 
-app.get(`/student/all`, function(request, response) {
+router.get(`/student/all`, function(request, response) {
   console.log(`got request for " /student/all/" `);
 
-  c.selectStudentAll( function(err, results){
+  let students = c.selectStudentAll( function(err, results){
     if(err){
       console.log(err.stack);
   }
   console.log(result.rows);
   })
-  response.send(`All Students`);
+  response.send(students);
 });
 
-app.get(`/student::id`, function(request, response) {
+router.get(`/student::id`, function(request, response) {
   let id = request.params.id;
   console.log(`got request for " /student/${id}" `);
 
-  c.selectStudent(id, function(err, results){
+  let student = c.selectStudent(id, function(err, results){
     if(err){
       console.log(err.stack);
   }
   console.log(result.rows);
   })
 
-  response.send(`Student ${id}`);
+  console.log(student)
+
+  response.send(student);
 
 });
 
 
 
-app.post('/campus/submit-data', function(request, response){
+router.post('/campus/submit-data', function(request, response){
     
   console.log("Processing some information");
 
@@ -100,7 +101,7 @@ app.post('/campus/submit-data', function(request, response){
   response.send("Post request");
 });
 
-app.post('/student/submit-data', function(request, response){
+router.post('/student/submit-data', function(request, response){
     
      
   console.log("Processing some information");
@@ -198,7 +199,8 @@ router.put(`/student::id/edit`, function(req, res, next) {
   res.send(`Edited Student ${id}`);
 });
 
-
+// console.log(c)
 
 
 module.exports = router;
+

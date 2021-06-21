@@ -10,23 +10,24 @@ const result = require('dotenv').config();
 // const s = require('./studentsDB');
 
 var {Sequelize, DataTypes} = require('sequelize');
-module.exports = {
-    campuses: campuses,
-    addCampus: addCampus,
-    editCampus: editCampus,
-    editCampusImage: editCampusImage,
-    deleteCampus: deleteCampus,
-    selectCampus: selectCampus,
-    selectCampusAll: selectCampusAll,
-    students: students,
-    addStudent : addStudent,
-    editStudent: editStudent,
-    editStudentImage: editStudentImage,
-    deleteStudent: deleteStudent,
-    selectStudent: selectStudent,
-    selectStudentAll: selectStudentAll,
-    selectStudentCampus: selectStudentCampus
-}
+
+// module.exports = {
+//     campuses: campuses,
+//     addCampus: addCampus(),
+//     editCampus: editCampus(),
+//     editCampusImage: editCampusImage(),
+//     deleteCampus: deleteCampus(),
+//     selectCampus: selectCampus(),
+//     selectCampusAll: selectCampusAll(),
+//     students: students,
+//     addStudent : addStudent(),
+//     editStudent: editStudent(),
+//     editStudentImage: editStudentImage(),
+//     deleteStudent: deleteStudent(),
+//     selectStudent: selectStudent(),
+//     selectStudentAll: selectStudentAll(),
+//     selectStudentCampus: selectStudentCampus()
+//   }
 
 const DB_PASS = process.env.DB_PASS;
 const DB_PORT= process.env.DB_PORT;
@@ -83,24 +84,28 @@ var campuses = sequelize.define('campus', {
 //maybe add a parameter validator 
 //consider adding an error checker
 
-var addCampus = (name, address, description) => {
+var addCampus =  (name, address, description) => {
     seshBegin();
     campuses.sync()
-    .then(campuses.create({
+    .then( async ()=> {
+        let campus = await campuses.create({
         name: name,
         address: address,
         description: description
 
-    }))
+    })
+    return campus
+})
     // .then(seshEnd());
 }
 
 
 
 var editCampus = (primaryKey, name, address, description) => {
-    seshBegin();
+    // seshBegin();
     campuses.sync()
-    .then(campuses.update({
+    .then( async() => {
+        let campus = await campuses.update({
         name: name,
         address: address,
         description: description
@@ -111,61 +116,75 @@ var editCampus = (primaryKey, name, address, description) => {
             id: primaryKey
         }
     }
-    ))
-    .then(seshEnd());
+    )
+    return campus;
+})
+    
 }
 
 var editCampusImage = (primaryKey, imageUrl) => {
-    seshBegin();
+    // seshBegin();
     campuses.sync()
-    .then(campuses.update({
+    .then( async () => {
+        campus = await campuses.update({
         imageUrl: imageUrl,
         },
-    {
-        where: {
-            id: primaryKey
-        }
-    }
-    ))
+        {
+            where: {
+                id: primaryKey
+            }
+        })
+        return campus;
+    })
     // .then(seshEnd());
 
 }
 
-var selectCampus = (primaryKey) => {
-    seshBegin();
-    campuses.sync()
-    .then(campuses.findByPk(primaryKey));
+var selectCampus = async (primaryKey) => {
+    // seshBegin();
+    // campuses.sync()
+    // .then(
+    let campus = await campuses.findByPk(primaryKey);
+    console.log(campus);
+    return campus;
 }
 
-var selectCampusAll = () => {
-    seshBegin;
-    campuses.sync()
-    .then(campuses.findAll())
+var selectCampusAll = async () => {
+    // seshBegin;
+    // campuses.sync()
+    // .then(
+    let allCampus = await campuses.findAll()
+    // .then( allCampus => {console.log(allCampus)});    
+    return allCampus;
 }
 
-var deleteCampus = (primaryKey) => {
+var deleteCampus =  (primaryKey) => {
 
     
-    seshBegin();
-    //adding for removal of campus field for all students who went to soon to be deleted campus
-    // students.sync()
-    //Below should be able to be commented out due to the default delete behavior for SEQULIZES has many
-    // .then(students.update({
-    //     campuses: null
+    // seshBegin();
+    // //adding for removal of campus field for all students who went to soon to be deleted campus
+    // // students.sync()
+    // //Below should be able to be commented out due to the default delete behavior for SEQULIZES has many
+    // // .then(students.update({
+    // //     campuses: null
 
-    // },
-    // {
-    //     where: {
-    //         campuses: primaryKey //need get this portion of query right but want to associate this where clause with campus key identifier
-    //     }
-    // }
-    // ))
+    // // },
+    // // {
+    // //     where: {
+    // //         campuses: primaryKey //need get this portion of query right but want to associate this where clause with campus key identifier
+    // //     }
+    // // }
+    // // ))
     campuses.sync()
-    .then(campuses.destroy({
-        where: {
-            id: primaryKey
+    .then( async () => {
+        let campus = await campuses.destroy({
+            where: {
+                id: primaryKey
+            }
+        })
+        return campus;
         }
-    }))
+    )
     // .then(seshEnd());
 }
 
@@ -211,17 +230,20 @@ var students = sequelize.define('student', {
 //maybe add a parameter validator 
 //consider adding an error checker
 
-var addStudent = (firstName, lastName, email, gpa, campus) => {
+var addStudent =  (firstName, lastName, email, gpa, campus) => {
     seshBegin();
     students.sync()
-    .then(students.create({
-        firstName: firstName,
-        lastName: lastName,
-        email : email,
-        gpa: gpa,
-        campusId: campus
+    .then( async () => {
+        let student = await students.create({
+            firstName: firstName,
+            lastName: lastName,
+            email : email,
+            gpa: gpa,
+            campusId: campus
 
-    }))
+        })
+        return student;
+    })
     // .then(seshEnd());
 }
 
@@ -230,73 +252,89 @@ var addStudent = (firstName, lastName, email, gpa, campus) => {
 var editStudent = (primaryKey, firstName, lastName, email, gpa, campus) => {
     seshBegin();
     students.sync()
-    .then(students.update({
-        firstName: firstName,
-        lastName: lastName,
-        email : email,
-        gpa: gpa,
-        campusId: campus
+    .then( async () => {
+        let student = await students.update({
+            firstName: firstName,
+            lastName: lastName,
+            email : email,
+            gpa: gpa,
+            campusId: campus
 
-    },
-    {
-        where: {
-            id: primaryKey
-        }
-    }
-    ))
+        },
+        {
+            where: {
+                id: primaryKey
+            }
+        })
+        return student;
+    })
     // .then(seshEnd());
 }
 
 var editStudentImage = (primaryKey, imageUrl) => {
-    seshBegin();
+    // seshBegin();
     students.sync()
-    .then(students.update({
+    .then( async () => {
+        let student = await students.update({
         imageUrl: imageUrl,
         },
-    {
-        where: {
+        { where: {
             id: primaryKey
-        }
-    }
-    ))
-    .then(seshEnd());
+            }
+        })
+        return student;
+        })
+    // .then(seshEnd());
 
 }
 
 var deleteStudent = (primaryKey) => {
-    seshBegin();
+    // seshBegin();
     students.sync()
-    .then(students.destroy({
-        where: {
-            id: primaryKey
-        }
-    }))
-    .then(seshEnd());
+    .then( async () => {
+        let student = await students.destroy({
+            where: {
+                id: primaryKey
+            }
+        })
+        return student;
+    })
+    // .then(seshEnd());
 }
 
-var selectStudent = (primaryKey) => {
-    seshBegin();
-    campuses.sync()
-    .then(campuses.findByPk(primaryKey));
+var selectStudent = async (primaryKey) => {
+    // seshBegin();
+    // students.sync()
+    // .then(
+    const student1 = await students.findByPk(primaryKey);
+    return student1;
 }
 
-var selectStudentAll = () => {
-    seshBegin;
-    campuses.sync()
-    .then(campuses.findAll())
+var selectStudentAll = async () => {
+    // seshBegin();
+    // students.sync()
+    // .then(
+    const studentAll = students.findAll();
+    return studentAll;
 }
 
 var selectStudentCampus = (campusId) => {
-    seshBegin;
+    let studentsCampus = [];
+    seshBegin();
     campuses.sync()
-    .then(campuses.findAll({where: {campusId: campusId}}));
+    .then( async () => {
+        studentsCampus = await students.findAll({where: {campusId: campusId}})
+        // console.log(studentsCampus);
+        return studentsCampus;
+    })
+    
 }
 
 //console.log(`${DB_USER}\n${DB_PASS}\n${DB_PORT}\n${DB_NAME}`);
 
-// seshBegin;
-campuses.sync();
-students.sync();
+seshBegin();
+// campuses.sync();
+// students.sync();
 
 // campuses.hasMany(students/*, (err) => {
 //     console.log(err);
@@ -327,12 +365,36 @@ students.belongsTo(campuses, {
 // addCampus("Roc-a-Fella", "Brooklyn, NY",""); //test case passed
 // addCampus("Dipset", "Manhattan, NY",""); //test case passed
 
-// addStudent("Killa", "Cam", "pink@dipset.com", 4.8, 3);
-// addStudent("Free", "Way", "highway@rockafella.com", 2.5, null);
-// addStudent("Juelz", "Santana", "heyma@dipset.com", 3.5, 3);
+// addStudent("Jay", "Z", "stabbed@un.com", 4.8, 1);
+
+// addStudent("J", "Cole", "jermaine@dream.com", 3.5, 1);
+
+selectStudentCampus(1)
 
 
 // addStudent("Cardi" ,"B", "blo@od.com", 3.7, null); //validator test passed
 // addStudent("Lloyd", "Banks", "G@unit.com", 4.8, 2);
-deleteCampus(2);
-deleteCampus(3);
+// deleteCampus(2);
+// deleteCampus(3);
+
+// selectStudent(3);
+// selectCampusAll();
+// console.log(testCAll);
+
+module.exports = {
+    campuses: campuses,
+    addCampus: addCampus,
+    editCampus: editCampus,
+    editCampusImage: editCampusImage,
+    deleteCampus: deleteCampus,
+    selectCampus: selectCampus,
+    selectCampusAll: selectCampusAll,
+    students: students,
+    addStudent : addStudent,
+    editStudent: editStudent,
+    editStudentImage: editStudentImage,
+    deleteStudent: deleteStudent,
+    selectStudent: selectStudent,
+    selectStudentAll: selectStudentAll,
+    selectStudentCampus: selectStudentCampus
+}
