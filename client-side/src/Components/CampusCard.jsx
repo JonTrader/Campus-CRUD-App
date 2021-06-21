@@ -16,7 +16,7 @@ class CampusCard extends Component
                     <Card.Body>
                         <Card.Title>{this.props.title}</Card.Title>
                         <Card.Text>
-                            Students: (numStudents)
+                            {this.props.address}
                         </Card.Text>
 
                         <Card.Text>

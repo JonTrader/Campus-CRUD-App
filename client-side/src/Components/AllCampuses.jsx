@@ -42,7 +42,7 @@ class Campus extends Component
         let allCampuses = this.state.allCampuses;
         if (allCampuses.length !== 0)
         {
-            return allCampuses.map(campus => (<CampusCard id={campus.id} key={campus.id} title={campus.name} description={campus.description} />))
+            return allCampuses.map(campus => (<CampusCard id={campus.id} key={campus.id} title={campus.name} description={campus.description} address={campus.address}/>))
         }
         else
         {

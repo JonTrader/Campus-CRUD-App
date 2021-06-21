@@ -30,6 +30,30 @@ class EditCampus extends Component
         this.setState({campus: response.data})
     }
 
+    handleSubmit = async (e) =>
+    { 
+        e.preventDefault();
+
+        const { match: { params } } = this.props;
+        const name = document.getElementById("name").value;
+        const address = document.getElementById("address").value;
+        const imageUrl = document.getElementById("imageUrl").value;
+        const description = document.getElementById("description").value;
+
+        const body = { name, address, imageUrl, description };
+
+        const response = await fetch(
+            `http://localhost:3010/campus:${params.id}/edit`,
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body)
+            }
+          );
+
+          window.location = "/";
+    }
+
     render()
     {
         const { match: { params } } = this.props;
@@ -41,7 +65,7 @@ class EditCampus extends Component
                 </div>
                 <Row className="justify-content-center">
                     <Col xs={6}>
-                        <form action = {campEdit} method="PUT" >
+                        <form action = {campEdit} method="POST" >
                             <Form.Group controlId="name">
                                 <Form.Label>Campus Name</Form.Label>
                                 <Form.Control aria-required type="text" placeholder={this.state.campus.name} name="name"ref/>
