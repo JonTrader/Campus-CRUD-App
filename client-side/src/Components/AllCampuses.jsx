@@ -25,7 +25,7 @@ class Campus extends Component
     {
         try
         {
-            const campusesValues = await axios("http://localhost:5000/allCampuses")
+            const campusesValues = await axios("http://localhost:3010/campus/all")
             this.setState({allCampuses: campusesValues.data})
             console.log(this.state.allCampuses);
         }

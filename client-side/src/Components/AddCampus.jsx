@@ -43,15 +43,15 @@ class AddCampus  extends Component
                 </div>
                 <Row className="justify-content-center">
                     <Col xs={6}>
-                        <form action="http://localhost:5000/allCampuses" method="POST" >
+                        <form action="http://localhost:3010/campus/submit-data" method="POST" >
                             <Form.Group controlId="name">
                                 <Form.Label>Campus Name</Form.Label>
-                                <Form.Control aria-required type="text" placeholder="Enter Campus Name" />
+                                <Form.Control aria-required type="text" placeholder="Enter Campus Name" name="name"ref/>
                             </Form.Group>
 
                             <Form.Group controlId="address">
                                 <Form.Label>Location</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Location" />
+                                <Form.Control type="text" placeholder="Enter Location" name="address"/>
                             </Form.Group>
 
                             <Form.Group controlId="imageUrl">
@@ -61,7 +61,7 @@ class AddCampus  extends Component
 
                             <Form.Group controlId="description">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control as="textarea" rows={3} />
+                                <Form.Control name = "description" as="textarea" rows={3} />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">
