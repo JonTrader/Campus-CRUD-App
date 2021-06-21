@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import StudentCard from './StudentCard'
+import axios from 'axios'
 
 class SingleCampus extends Component
 {
@@ -17,18 +18,20 @@ class SingleCampus extends Component
 
         this.state =
         {
-            allCampuses: []
+            campus: {}
         }
     }
 
-    // componentDidMount()
-    // {
 
-    //     console.log("Hello")
-    //     fetch("http://localhost:5000/allCampuses")
-    //         .then()
+    async componentDidMount()
+    {
+        const { match: { params } } = this.props;
 
-    // }
+        const response = await axios.get(`http://localhost:3010/campus:${params.id}`)
+        const responseStudents = await axios.get(`http://localhost:3010/campus:${params.id}/students`)
+        this.setState({campus: response.data})
+        console.log(responseStudents.data)
+    }
 
 
     render()
@@ -41,14 +44,13 @@ class SingleCampus extends Component
                             <Image src="https://images.unsplash.com/photo-1603573355706-3f15d98cf100?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FtcHVzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80" rounded />
                         </Col>
                         <Col>
-                            <h2>Campus Name</h2>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident deserunt molestias illo voluptatum, quis eaque consequatur eum nulla porro, eligendi placeat perferendis voluptas sequi consequuntur rem in harum aperiam vel!</p>
+                            <h2>{this.state.campus.name}</h2>
+                            <p>{this.state.campus.description}</p>
                         </Col>
                     </Row>
                     <Row className="align-items-center text-center">
                         <Col className="pt-2">
-                            <h6>Address1:</h6>
-                            <h6>Address1:</h6>
+                            <h6>{this.state.campus.description}</h6>
                         </Col>
                         <Col>
                             <Button variant="warning">Edit</Button>{' '}
@@ -68,36 +70,7 @@ class SingleCampus extends Component
                 </Row>
 
                 <Row className="mt-3">
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
-                    <StudentCard w="12"/> {/* Testing Purposes*/}
+                    <StudentCard w="12"/> {/* Testing Purposes*/ }
                     
                 </Row>
             </Container>

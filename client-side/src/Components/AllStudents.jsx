@@ -26,7 +26,7 @@ class AllStudents extends Component
     {
         try
         {
-            const studentsValues = await axios("http://localhost:5000/allStudents")
+            const studentsValues = await axios("http://localhost:3010/student/all")
             this.setState({allStudents: studentsValues.data})
             console.log(this.state.allCampuses);
         }
@@ -41,6 +41,7 @@ class AllStudents extends Component
     {
 
         let allStudents = this.state.allStudents;
+        console.log(allStudents)
         if (allStudents.length !== 0)
         {
             return allStudents.map(student => (<StudentCard key={student.id} fname={student.firstName} lname={student.lastName} gpa={student.gpa} />))
@@ -80,7 +81,7 @@ class AllStudents extends Component
                 </Jumbotron>
 
                 <Row>
-                    
+                    <this.students />
                 </Row>
             </Container>
         )
