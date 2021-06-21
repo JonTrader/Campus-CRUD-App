@@ -32,6 +32,7 @@ class EditCampus extends Component
 
     render()
     {
+        const { match: { params } } = this.props;
         const campEdit = `http://localhost:3010/campus:${params.id}/edit`;
         return(
             <Container className="mt-5">
