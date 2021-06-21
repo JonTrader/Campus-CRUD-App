@@ -40,9 +40,11 @@ class AllStudents extends Component
     students = () =>
     {
 
-        let Students = this.state.allStudents;
-        
-        if (Students.length !== 0)
+
+        let allStudents = this.state.allStudents;
+        console.log(allStudents)
+        if (allStudents.length !== 0)
+
         {
             return Students.map(student => (<StudentCard key={student.id} fname={student.firstName} lname={student.lastName} gpa={student.gpa} />))
         }
