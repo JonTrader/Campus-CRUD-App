@@ -6,6 +6,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Student extends Component
@@ -49,7 +50,8 @@ class Student extends Component
                             <p>Email: {student.email}</p>
                             <p>GPA: {student.gpa}</p>
                             <div>
-                                <Button variant="warning">Edit</Button>{' '}
+                                
+                                <Link to={`/edit/student:${student.id}`}><Button variant="warning">Edit</Button>{' '}</Link>
                                 <Button variant="danger">Delete</Button>{' '}
                             </div>
                         </Col>
