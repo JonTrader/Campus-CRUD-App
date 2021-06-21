@@ -330,15 +330,15 @@ var selectStudentAll = async () => {
     return studentAll;
 }
 
-var selectStudentCampus = (campusId) => {
-    let studentsCampus = [];
-    seshBegin();
-    campuses.sync()
-    .then( async () => {
-        studentsCampus = await students.findAll({where: {campusId: campusId}})
+var selectStudentCampus = async (campusId) => {
+    // let studentsCampus = [];
+    // seshBegin();
+    // campuses.sync()
+    // .then( async () => {
+    let studentsCampus = await students.findAll({where: {campusId: campusId}})
         // console.log(studentsCampus);
         return studentsCampus;
-    })
+    // })
     
 }
 

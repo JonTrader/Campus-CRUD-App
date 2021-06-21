@@ -18,7 +18,8 @@ class SingleCampus extends Component
 
         this.state =
         {
-            campus: {}
+            campus: {},
+            students: {}
         }
     }
 
@@ -30,7 +31,8 @@ class SingleCampus extends Component
         const response = await axios.get(`http://localhost:3010/campus:${params.id}`)
         const responseStudents = await axios.get(`http://localhost:3010/campus:${params.id}/students`)
         this.setState({campus: response.data})
-        console.log(responseStudents.data)
+        this.setState({students: responseStudents.data})
+        console.log(this.state.students)
     }
 
 
