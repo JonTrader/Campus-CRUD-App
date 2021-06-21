@@ -46,7 +46,9 @@ class EditCampus extends Component
             `http://localhost:3010/campus:${params.id}/edit`,
             {
               method: "PUT",
-              headers: { "Content-Type": "application/json" },
+              headers: { 
+                  "Content-Type": "application/json" 
+                },
               body: JSON.stringify(body)
             }
           );
@@ -65,7 +67,7 @@ class EditCampus extends Component
                 </div>
                 <Row className="justify-content-center">
                     <Col xs={6}>
-                        <form action = {campEdit} method="POST" >
+                        <form action = {this.handleSubmit()} method="POST" >
                             <Form.Group controlId="name">
                                 <Form.Label>Campus Name</Form.Label>
                                 <Form.Control aria-required type="text" placeholder={this.state.campus.name} name="name"ref/>

@@ -36,9 +36,8 @@ class SingleCampus extends Component
 
         const response = await axios.get(`http://localhost:3010/campus:${params.id}`)
         const responseStudents = await axios.get(`http://localhost:3010/campus:${params.id}/students`)
-        this.setState({campus: response.data})
-        this.setState({students: responseStudents.data})
-        console.log(this.state.students)
+        this.setState({campus: response.data, students: responseStudents.data}) //set State in one line
+        console.log(this.state)
     }
 
 
