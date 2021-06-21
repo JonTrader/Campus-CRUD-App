@@ -5,33 +5,10 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import axios from 'axios'
 
 
 class AddCampus  extends Component
 {
-
-    // handleOnSubmit = async () =>
-    // {
-    //     const name = document.getElementById("name");
-    //     const address = document.getElementById("address");
-    //     const imageUrl = document.getElementById("imageUrl");
-    //     const description = document.getElementById("description");
-
-    //     const body = { name, address, imageUrl, description };
-    //     try
-    //     {
-    //         const response = await axios.post('http://localhost:5000/allCampuses', body);
-    //         console.log(response)
-    //     }
-    //     catch (error)
-    //     {
-            
-    //     }
-
-        
-
-    // }
 
 
     render()

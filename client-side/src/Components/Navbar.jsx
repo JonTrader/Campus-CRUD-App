@@ -9,7 +9,7 @@ class navbar extends Component
     {
         return(
             <Navbar bg="dark" variant="dark" expand="md" className="pl-5 pr-5">
-                <Navbar.Brand href="" >Project 1 (Placeholder)</Navbar.Brand>
+                <Navbar.Brand href="" >School System of HardKnocks</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">

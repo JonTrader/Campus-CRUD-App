@@ -10,6 +10,9 @@ class AddStudent extends Component
 {
     render()
     {
+
+        
+
         return(
             <Container className="mt-5">
                 <div className="text-center mb-5">
@@ -40,7 +43,7 @@ class AddStudent extends Component
 
                             <Form.Group controlId="gpa">
                                 <Form.Label>GPA</Form.Label>
-                                <Form.Control type="number" placeholder="Enter GPA" min="0.0" max="4.0" name="gpa" />
+                                <Form.Control type="number" placeholder="Enter GPA" min="0.0" max="4.0" step="0.01" name="gpa" />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">

@@ -19,8 +19,10 @@ class SingleCampus extends Component
         this.state =
         {
             campus: {},
-            students: {},
-            match: {
+
+            students: [],
+            match:
+            {
                 params : this.props
             }
         }
@@ -38,7 +40,26 @@ class SingleCampus extends Component
         console.log(this.state.students)
     }
 
-    delete= (id) => {
+
+    students = () =>
+    {
+        let studentValues = this.state.students;
+        if (studentValues.length !== 0)
+        {
+            return studentValues.map(student => <StudentCard id={student.id} key={student.id} fname={student.firstName} lname={student.lastName} gpa={student.gpa}/>)
+        }
+        else
+        {
+            return (
+                <div className="text-center mt-5">
+                    <h4>No Students Belong To This Campus</h4>
+                </div>
+            )
+        }
+    }
+
+    delete= (id) =>
+    {
         
 
         // axios.delete(`http://localhost:3010/campus:${id}/delete`)
@@ -49,7 +70,6 @@ class SingleCampus extends Component
             url: `http://localhost:3010/campus:${id}/delete`,
             
           });
-
 
     }
 
@@ -90,8 +110,7 @@ class SingleCampus extends Component
                 </Row>
 
                 <Row className="mt-3">
-                    <StudentCard w="12"/> {/* Testing Purposes*/ }
-                    
+                    <this.students />   
                 </Row>
             </Container>
         )
