@@ -188,15 +188,13 @@ var deleteCampus =  (primaryKey) => {
     // // }
     // // ))
     campuses.sync()
-    .then( async () => {
-        let campus = await campuses.destroy({
+    // .then( async () => {
+    campuses.destroy({
             where: {
                 id: primaryKey
             }
         })
-        return campus;
-        }
-    )
+    // )
     // .then(seshEnd());
 }
 
