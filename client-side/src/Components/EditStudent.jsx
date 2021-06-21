@@ -67,7 +67,7 @@ class EditStudent extends Component
 
                             <Form.Group controlId="gpa">
                                 <Form.Label>GPA</Form.Label>
-                                <Form.Control type="number" placeholder={this.state.student.gpa} min="0.0" max="4.0" name="gpa" />
+                                <Form.Control type="number" placeholder={this.state.student.gpa} min="0.0" max="4.0" step="0.01" name="gpa" />
                             </Form.Group>
 
                             <Form.Group controlId="campusId">
