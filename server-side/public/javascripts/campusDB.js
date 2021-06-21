@@ -10,6 +10,16 @@ const result = require('dotenv').config();
 // const s = require('./studentsDB');
 
 var {Sequelize, DataTypes} = require('sequelize');
+// module.exports = {
+//     campuses: campuses,
+//     addCampus: addCampus,
+//     editCampus: editCampus,
+//     deleteCampus: deleteCampus,
+//     students: students,
+//     addStudent : addStudent,
+//     editStudent: editStudent,
+//     deleteStudent: deleteStudent
+// }
 
 // module.exports = {
 //     campuses: campuses,
@@ -81,6 +91,8 @@ var campuses = sequelize.define('campus', {
 
 
 
+
+
 //maybe add a parameter validator 
 //consider adding an error checker
 
@@ -102,7 +114,7 @@ var addCampus =  (name, address, description) => {
 
 
 var editCampus = (primaryKey, name, address, description) => {
-    // seshBegin();
+    seshBegin();
     campuses.sync()
     .then( async() => {
         let campus = await campuses.update({
