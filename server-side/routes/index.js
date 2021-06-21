@@ -1,29 +1,33 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors');
 var c = require('../public/javascripts/campusDB');
+
+router.use(cors());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get(`/campus/all`, function(request, response) {
+router.get(`/campus/all`, async function(request, response) {
   console.log(`got request for " /campus/all/" `);
 
-  const campuses = c.selectCampusAll( function(err, results){
+  const campusAll = await c.selectCampusAll( function(err, results){
     if(err){
       console.log(err.stack);
   }
   console.log(result.rows);
   })
-  response.send(campuses);
+  
+  response.send(campusAll);
 });
 
-router.get(`/campus::id`, function(request, response) {
+router.get(`/campus::id`, async function(request, response) {
   let id = request.params.id;
   console.log(`got request for " /campus/${id}" `);
 
-  const campus = c.selectCampus(id, function(err, results){
+  const campus = await c.selectCampus(id, function(err, results){
     if(err){
       console.log(err.stack);
   }
@@ -33,11 +37,11 @@ router.get(`/campus::id`, function(request, response) {
   response.send(campus);
 });
 
-router.get(`/campus::id/students`, function(request, response) {
+router.get(`/campus::id/students`, async function(request, response) {
   let id = request.params.id;
   console.log(`got request for " /campus/${id}/students" `);
 
-  const campStudents = c.selectStudentCampus(id, function(err, results){
+  const campStudents = await c.selectStudentCampus(id, function(err, results){
     if(err){
       console.log(err.stack);
   }
@@ -47,10 +51,10 @@ router.get(`/campus::id/students`, function(request, response) {
   response.send(campStudents);
 });
 
-router.get(`/student/all`, function(request, response) {
+router.get(`/student/all`, async function(request, response) {
   console.log(`got request for " /student/all/" `);
 
-  let students = c.selectStudentAll( function(err, results){
+  let students = await c.selectStudentAll( function(err, results){
     if(err){
       console.log(err.stack);
   }
@@ -59,11 +63,11 @@ router.get(`/student/all`, function(request, response) {
   response.send(students);
 });
 
-router.get(`/student::id`, function(request, response) {
+router.get(`/student::id`, async function(request, response) {
   let id = request.params.id;
   console.log(`got request for " /student/${id}" `);
 
-  let student = c.selectStudent(id, function(err, results){
+  let student = await c.selectStudent(id, function(err, results){
     if(err){
       console.log(err.stack);
   }
