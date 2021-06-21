@@ -1,15 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Navbar from './Components/Navbar' //testing
-import AllCampuses from './Components/AllCampuses' //testing
+import Navbar from './Components/Navbar'
+import AllCampuses from './Components/AllCampuses'
+import AllStudents from './Components/AllStudents'
+import AddCampus from './Components/AddCampus'
+import AddStudent from './Components/AddStudent'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 ReactDOM.render(
 	<React.StrictMode>
-		<AllCampuses /> {/* added for testing */}
-		{/* <App /> Removed for testing*/}
+		<Router>
+			<Navbar />
+			<Switch>
+				<Route path="/" component={AllCampuses} exact/>
+				<Route path="/allCampuses" component={AllCampuses} exact/>
+				<Route path="/allStudents" component={AllStudents} exact/>
+				<Route path="/addCampus" component={AddCampus}/>
+				<Route path="/addStudent" component={AddStudent}/>
+				{/* <Route path="" />
+				<Route path="" />
+				<Route path="" /> */}
+			</Switch>
+		</Router>
   	</React.StrictMode>,
   document.getElementById('root')
 );
