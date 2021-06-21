@@ -22,10 +22,7 @@ class SingleCampus extends Component
             campus: {},
 
             students: [],
-            match:
-            {
-                params : this.props
-            }
+            id: ""
         }
     }
 
@@ -36,8 +33,8 @@ class SingleCampus extends Component
 
         const response = await axios.get(`http://localhost:3010/campus:${params.id}`)
         const responseStudents = await axios.get(`http://localhost:3010/campus:${params.id}/students`)
-        this.setState({campus: response.data, students: responseStudents.data}) //set State in one line
-        console.log(this.state)
+        this.setState({campus: response.data, students: responseStudents.data, id: params.id})
+        console.log(this.state.students)
     }
 
 
@@ -58,18 +55,15 @@ class SingleCampus extends Component
         }
     }
 
-    delete= (id) =>
+    delete = async (id) =>
     {
         
 
-        // axios.delete(`http://localhost:3010/campus:${id}/delete`)
-        // console.log(`campus ${id} has been deleted`);
+        // await axios.delete(`http://localhost:3010/campus:${id}/delete`)
+        console.log(`campus ${this.state.id} has been deleted`);
+        
 
-        axios({
-            method: 'delete',
-            url: `http://localhost:3010/campus:${id}/delete`,
-            
-          });
+        // const deleteBtn = await axios({ method: 'delete', url: `http://localhost:3010/campus:${id}/delete` });
 
     }
 
@@ -96,7 +90,7 @@ class SingleCampus extends Component
                         </Col>
                         <Col>
                         <Link to={`/edit/campus:${this.state.campus.id}`}><Button variant="warning">Edit</Button>{' '}</Link>
-                            <Button variant="danger" onClick={this.delete(this.props.id)}>Delete</Button>{' '}
+                            <Button variant="danger" onClick={this.delete}>Delete</Button>{' '}
                         </Col>
                     </Row>
                 </Jumbotron>
