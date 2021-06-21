@@ -19,7 +19,10 @@ class SingleCampus extends Component
         this.state =
         {
             campus: {},
-            students: {}
+            students: {},
+            match: {
+                params : this.props
+            }
         }
     }
 
@@ -33,6 +36,21 @@ class SingleCampus extends Component
         this.setState({campus: response.data})
         this.setState({students: responseStudents.data})
         console.log(this.state.students)
+    }
+
+    delete= (id) => {
+        
+
+        // axios.delete(`http://localhost:3010/campus:${id}/delete`)
+        // console.log(`campus ${id} has been deleted`);
+
+        axios({
+            method: 'delete',
+            url: `http://localhost:3010/campus:${id}/delete`,
+            
+          });
+
+
     }
 
 
@@ -56,7 +74,7 @@ class SingleCampus extends Component
                         </Col>
                         <Col>
                             <Button variant="warning">Edit</Button>{' '}
-                            <Button variant="danger">Delete</Button>{' '}
+                            <Button variant="danger" onClick={this.delete(this.props.id)}>Delete</Button>{' '}
                         </Col>
                     </Row>
                 </Jumbotron>
