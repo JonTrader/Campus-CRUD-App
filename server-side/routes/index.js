@@ -139,7 +139,7 @@ router.post('/student/submit-data', function(request, response){
 
 router.delete(`/campus::id/delete`, function(req, res, next) {
 
-  let id = request.params.id;
+  let id = req.params.id;
   console.log(`Deleting Campus id: ${id}`);
 
   c.deleteCampus(id ,function(err,result){
@@ -155,7 +155,7 @@ router.delete(`/campus::id/delete`, function(req, res, next) {
   
 router.delete(`/student::id/delete`, function(req, res, next) {
 
-  let id = request.params.id;
+  let id = req.params.id;
   console.log(`Deleting Student id: ${id}`);
   
   c.deleteStudent(id);
@@ -163,13 +163,13 @@ router.delete(`/student::id/delete`, function(req, res, next) {
   
 });
 
-router.put(`/campus::id/edit`, function(req, res, next) {
-  let id = request.params.id;
+router.post(`/campus::id/edit`, function(req, res) {
+  let id = req.params.id;
   console.log(`Editing Campus id: ${id}`);
 
-  let name= request.body.name;
-  let address = request.body.address;
-  let description = request.body.description;
+  let name= req.body.name;
+  let address = req.body.address;
+  let description = req.body.description;
 
   
   
@@ -187,15 +187,15 @@ router.put(`/campus::id/edit`, function(req, res, next) {
   res.send(`Edited Campus ${id}`);
 });
 
-router.put(`/student::id/edit`, function(req, res, next) {
-  let id = request.params.id;
+router.post(`/student::id/edit`, function(req, res, ) {
+  let id = req.params.id;
   console.log(`Editing Student id: ${id}`);
 
-  let firstName= request.body.firstName;
-  let lastName= request.body.lastName;
-  let email= request.body.email;
-  let gpa= request.body.gpa;
-  let campusId= request.body.campusId;
+  let firstName= req.body.firstName;
+  let lastName= req.body.lastName;
+  let email= req.body.email;
+  let gpa= req.body.gpa;
+  let campusId= (req.body.campusId == "") ? null: req.body.campusId;
 
   
   console.log(firstName);

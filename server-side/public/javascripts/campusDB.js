@@ -232,6 +232,14 @@ var students = sequelize.define('student', {
     },
     campusId:{
         type: Sequelize.INTEGER,
+        validate: {
+            campusCheck(value) {
+                if (campuses.findOne == null){
+                    this.campusId = null;
+                    console.log("No Campus with that ID Found")
+                }
+            }
+        }
     }
     
 

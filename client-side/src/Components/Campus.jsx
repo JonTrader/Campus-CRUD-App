@@ -55,11 +55,11 @@ class SingleCampus extends Component
         }
     }
 
-    delete = async (id) =>
+    delete = async () =>
     {
         
 
-        // await axios.delete(`http://localhost:3010/campus:${id}/delete`)
+        await axios.delete(`http://localhost:3010/campus:${this.state.id}/delete`)
         console.log(`campus ${this.state.id} has been deleted`);
         
 

@@ -42,7 +42,7 @@ class EditCampus extends Component
 
         const body = { name, address, imageUrl, description };
 
-        const response = await fetch(
+        await axios.put(
             `http://localhost:3010/campus:${params.id}/edit`,
             {
               method: "PUT",
@@ -67,7 +67,7 @@ class EditCampus extends Component
                 </div>
                 <Row className="justify-content-center">
                     <Col xs={6}>
-                        <form action = {this.handleSubmit()} method="POST" >
+                        <form action = {campEdit} method="POST" >
                             <Form.Group controlId="name">
                                 <Form.Label>Campus Name</Form.Label>
                                 <Form.Control aria-required type="text" placeholder={this.state.campus.name} name="name"ref/>
