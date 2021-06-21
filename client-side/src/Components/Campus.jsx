@@ -19,7 +19,7 @@ class SingleCampus extends Component
         this.state =
         {
             campus: {},
-            students: {}
+            students: []
         }
     }
 
@@ -33,6 +33,23 @@ class SingleCampus extends Component
         this.setState({campus: response.data})
         this.setState({students: responseStudents.data})
         console.log(this.state.students)
+    }
+
+    students = () =>
+    {
+        let studentValues = this.state.students;
+        if (studentValues.length !== 0)
+        {
+            return studentValues.map(student => <StudentCard id={student.id} key={student.id} fname={student.firstName} lname={student.lastName} gpa={student.gpa}/>)
+        }
+        else
+        {
+            return (
+                <div className="text-center mt-5">
+                    <h4>No Students Belong To This Campus</h4>
+                </div>
+            )
+        }
     }
 
 
@@ -72,8 +89,7 @@ class SingleCampus extends Component
                 </Row>
 
                 <Row className="mt-3">
-                    <StudentCard w="12"/> {/* Testing Purposes*/ }
-                    
+                    <this.students />   
                 </Row>
             </Container>
         )
