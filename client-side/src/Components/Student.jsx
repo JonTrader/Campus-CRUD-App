@@ -6,9 +6,31 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import axios from 'axios';
 
-class Students extends Component
+class Student extends Component
 {
+
+    constructor()
+    {
+        super();
+
+        this.state =
+        {
+            student: {}
+        }
+    }
+
+
+    async componentDidMount()
+    {
+        const { match: { params } } = this.props;
+        console.log(params.id)
+        const response = await axios.get(`http://localhost:3010/student:${params.id}`)
+        console.log(this.response)
+    }
+
+
     render()
     {
         return(
@@ -19,7 +41,7 @@ class Students extends Component
                             <Image src="http://4.bp.blogspot.com/-zsbDeAUd8aY/US7F0ta5d9I/AAAAAAAAEKY/UL2AAhHj6J8/s1600/facebook-default-no-profile-pic.jpg" thumbnail />
                         </Col>
                         <Col>
-                            <h2>Student Name</h2>
+                            <h2>{} {}</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident deserunt molestias illo voluptatum, quis eaque consequatur eum nulla porro, eligendi placeat perferendis voluptas sequi consequuntur rem in harum aperiam vel!</p>
                             <div className="text-center">
                                 <Button variant="warning">Edit</Button>{' '}
@@ -43,4 +65,4 @@ class Students extends Component
     }
 }
 
-export default Students;
+export default Student;

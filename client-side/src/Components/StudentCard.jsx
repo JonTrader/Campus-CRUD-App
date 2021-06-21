@@ -19,7 +19,7 @@ class StudentCard extends Component
                             GPA: {this.props.gpa}
                         </Card.Text>
 
-                        <a href="https://www.google.com"><Button variant="info">View</Button></a>
+                        <a href={`/student:${this.props.id}`}><Button variant="info">View</Button></a>
                     </Card.Body>
                 </Card>
             </Col>
