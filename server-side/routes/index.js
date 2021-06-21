@@ -142,7 +142,13 @@ router.delete(`/campus::id/delete`, function(req, res, next) {
   let id = request.params.id;
   console.log(`Deleting Campus id: ${id}`);
 
-  c.deleteCampus(id);
+  c.deleteCampus(id ,function(err,result){
+    if(err){
+      console.log(err.stack)
+    }
+    console.log(result.rows);
+  });
+  
   res.send(`Deleted Campus ${id}`);
 });
 
