@@ -17,20 +17,20 @@ class AddStudent extends Component
                 </div>
                 <Row className="justify-content-center">
                     <Col xs={6}>
-                        <form action="" method="POST">
+                        <form action="http://localhost:3010/student/submit-data" method="POST">
                             <Form.Group controlId="firstname">
                                 <Form.Label>Student's First Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter First Name" />
+                                <Form.Control type="text" placeholder="Enter First Name" name="firstName"/>
                             </Form.Group>
 
                             <Form.Group controlId="lastname">
                                 <Form.Label>Student's Last Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Last Name" />
+                                <Form.Control type="text" placeholder="Enter Last Name" name="lastName"/>
                             </Form.Group>
 
                             <Form.Group controlId="email">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="Enter Email" />
+                                <Form.Control type="email" placeholder="Enter Email" name="email"/>
                             </Form.Group>
 
                             <Form.Group controlId="imageURL">
@@ -40,7 +40,7 @@ class AddStudent extends Component
 
                             <Form.Group controlId="gpa">
                                 <Form.Label>GPA</Form.Label>
-                                <Form.Control type="number" placeholder="Enter GPA" min="0" max="4"/>
+                                <Form.Control type="number" placeholder="Enter GPA" min="0.0" max="4.0" name="gpa" />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">

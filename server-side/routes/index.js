@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 var cors = require('cors');
 var c = require('../public/javascripts/campusDB');
+let bodyParser = require(`body-parser`);
+
 
 router.use(cors());
+router.use(bodyParser.urlencoded({extended:false}));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -82,27 +85,28 @@ router.get(`/student::id`, async function(request, response) {
 
 
 
-router.post('/campus/submit-data', function(request, response){
+router.post('/campus/submit-data', async function(request, response){
     
   console.log("Processing some information");
+  console.log(request.params);
 
-  let name= request.params.name;
-  let address = request.params.address;
-  let description = request.params.description
+  let name= request.body.name;
+  let address = request.body.address;
+  let description = request.body.description;
   
   
   console.log(name);
   console.log(address);
   console.log(description);
 
-  c.addCampus(name,address,description, function(err, result){
+  let campusAdd = await c.addCampus(name,address,description, function(err, result){
     if(err){
       console.log(err.stack)
     }
     console.log(result.rows);
   });
 
-  response.send("Post request");
+  response.send(campusAdd);
 });
 
 router.post('/student/submit-data', function(request, response){
@@ -110,11 +114,11 @@ router.post('/student/submit-data', function(request, response){
      
   console.log("Processing some information");
 
-  let firstName= request.params.firstName;
-  let lastName= request.params.lastName;
-  let email= request.params.email;
-  let gpa= request.params.gpa;
-  let campusId= request.params.campusId;
+  let firstName= request.body.firstName;
+  let lastName= request.body.lastName;
+  let email= request.body.email;
+  let gpa= request.body.gpa;
+  let campusId= request.body.campusId;
 
   
   console.log(firstName);
@@ -157,9 +161,10 @@ router.put(`/campus::id/edit`, function(req, res, next) {
   let id = request.params.id;
   console.log(`Editing Campus id: ${id}`);
 
-  let name= request.params.name;
-  let address = request.params.address;
-  let description = request.params.description
+  let name= request.body.name;
+  let address = request.body.address;
+  let description = request.body.description;
+
   
   
   console.log(name);
@@ -180,11 +185,11 @@ router.put(`/student::id/edit`, function(req, res, next) {
   let id = request.params.id;
   console.log(`Editing Student id: ${id}`);
 
-  let firstName= request.params.firstName;
-  let lastName= request.params.lastName;
-  let email= request.params.email;
-  let gpa= request.params.gpa;
-  let campusId= request.params.campusId;
+  let firstName= request.body.firstName;
+  let lastName= request.body.lastName;
+  let email= request.body.email;
+  let gpa= request.body.gpa;
+  let campusId= request.body.campusId;
 
   
   console.log(firstName);
