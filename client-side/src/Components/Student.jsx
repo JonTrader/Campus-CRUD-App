@@ -17,7 +17,7 @@ class Student extends Component
 
         this.state =
         {
-            student: {}
+            student: ""
         }
     }
 
@@ -27,12 +27,16 @@ class Student extends Component
         const { match: { params } } = this.props;
         console.log(params.id)
         const response = await axios.get(`http://localhost:3010/student:${params.id}`)
-        console.log(this.response)
+        console.log(response.data)
+        this.setState({student: response.data})
     }
 
 
     render()
     {
+
+        const student = this.state.student;
+        console.log(student);
         return(
             <Container>
                 <Jumbotron className="mt-4">
@@ -41,9 +45,10 @@ class Student extends Component
                             <Image src="http://4.bp.blogspot.com/-zsbDeAUd8aY/US7F0ta5d9I/AAAAAAAAEKY/UL2AAhHj6J8/s1600/facebook-default-no-profile-pic.jpg" thumbnail />
                         </Col>
                         <Col>
-                            <h2>{} {}</h2>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident deserunt molestias illo voluptatum, quis eaque consequatur eum nulla porro, eligendi placeat perferendis voluptas sequi consequuntur rem in harum aperiam vel!</p>
-                            <div className="text-center">
+                            <h2>{`${student.firstName} - ${student.lastName}`}</h2>
+                            <p>Email: {student.email}</p>
+                            <p>GPA: {student.gpa}</p>
+                            <div>
                                 <Button variant="warning">Edit</Button>{' '}
                                 <Button variant="danger">Delete</Button>{' '}
                             </div>
@@ -52,13 +57,6 @@ class Student extends Component
                 </Jumbotron>
 
                 <Row className="mt-5 text-center">
-                    <Col>
-                        <h4>Students on Campus</h4>
-                    </Col>
-
-                    <Col>
-                        <Button>Add Students</Button>
-                    </Col>
                 </Row>
             </Container>
         )
