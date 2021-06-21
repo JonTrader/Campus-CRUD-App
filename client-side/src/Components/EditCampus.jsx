@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
-import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
@@ -25,6 +24,7 @@ class EditCampus extends Component
     async componentDidMount()
     {
         const { match: { params } } = this.props;
+        console.log(params)
 
         const response = await axios.get(`http://localhost:3010/campus:${params.id}`)
         this.setState({campus: response.data})

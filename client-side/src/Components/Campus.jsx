@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import StudentCard from './StudentCard'
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 class SingleCampus extends Component
@@ -93,7 +94,7 @@ class SingleCampus extends Component
                             <h6>{this.state.campus.description}</h6>
                         </Col>
                         <Col>
-                            <Button variant="warning">Edit</Button>{' '}
+                        <Link to={`/edit/campus:${this.state.campus.id}`}><Button variant="warning">Edit</Button>{' '}</Link>
                             <Button variant="danger" onClick={this.delete(this.props.id)}>Delete</Button>{' '}
                         </Col>
                     </Row>
@@ -109,7 +110,7 @@ class SingleCampus extends Component
                     </Col>
                 </Row>
 
-                <Row className="mt-3">
+                <Row className="mt-5">
                     <this.students />   
                 </Row>
             </Container>

@@ -10,6 +10,9 @@ import AddCampus from './Components/AddCampus'
 import AddStudent from './Components/AddStudent'
 import Campus from './Components/Campus'
 import Student from './Components/Student'
+import EditStudent from './Components/EditStudent'
+import EditCampus from './Components/EditCampus'
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
@@ -25,8 +28,8 @@ ReactDOM.render(
 				<Route path="/addStudent" component={AddStudent}/>
 				<Route path="/campus::id" component={Campus} />
 				<Route path="/student::id" component={Student} />
-				<Route path="" />
-				<Route path="" />
+				<Route path="/edit/student::id" component={EditStudent}/>
+				<Route path="/edit/campus::id" component={EditCampus} />
 			</Switch>
 		</Router>
   	</React.StrictMode>,
