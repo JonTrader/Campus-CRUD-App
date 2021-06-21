@@ -94,7 +94,7 @@ class SingleCampus extends Component
                             <h6>{this.state.campus.description}</h6>
                         </Col>
                         <Col>
-                        <Link to={`/edit/student:${this.state.campus.id}`}><Button variant="warning">Edit</Button>{' '}</Link>
+                        <Link to={`/edit/campus:${this.state.campus.id}`}><Button variant="warning">Edit</Button>{' '}</Link>
                             <Button variant="danger" onClick={this.delete(this.props.id)}>Delete</Button>{' '}
                         </Col>
                     </Row>
@@ -110,7 +110,7 @@ class SingleCampus extends Component
                     </Col>
                 </Row>
 
-                <Row className="mt-3">
+                <Row className="mt-5">
                     <this.students />   
                 </Row>
             </Container>

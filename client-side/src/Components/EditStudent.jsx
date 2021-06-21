@@ -25,16 +25,18 @@ class EditStudent extends Component
     async componentDidMount()
     {
         const { match: { params } } = this.props;
+        console.log(params);
 
         const response = await axios.get(`http://localhost:3010/student:${params.id}`)
-        this.setState({campus: response.data})
+        console.log(response);
+        this.setState({student: response.data})
     }
 
     render()
     {
 
         const { match: { params } } = this.props;
-        const studEdit = `http://localhost:3010/student:${params.id}/edit`;
+        const studEdit = `http://localhost:3010/student:${params.id}/edit?_method=PUT`;
 
         return(
             <Container className="mt-5">
@@ -43,7 +45,7 @@ class EditStudent extends Component
                 </div>
                 <Row className="justify-content-center">
                     <Col xs={6}>
-                        <form action={studEdit} method="PUT">
+                        <form action={studEdit} method="POST">
                             <Form.Group controlId="firstname">
                                 <Form.Label>Student's First Name</Form.Label>
                                 <Form.Control type="text" placeholder={this.state.student.firstName} name="firstName"/>
